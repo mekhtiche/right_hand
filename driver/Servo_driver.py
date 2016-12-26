@@ -2,7 +2,7 @@
 import sys,os.path
 sys.path.append(os.path.join(os.path.dirname(os.path.realpath(__file__)), os.pardir))
 import rospy
-from right_hand.msg import servoSet
+from right_hand.msg import servoSet, servoCmd
 from servo.Adafruit_PWM_Servo_Driver import PWM
 print "RIGHT SERVO_DRIVER successful import"
 Rpwm = PWM(0x40, 1)
@@ -25,17 +25,20 @@ def doIt(Rcmd):
     
 
 
-def callback(data):
+def CALLBACK(data):
     print data
     #doIt(data.cmd)
 
-
+def callback(data):
+    print data
+    #Rpwm.setPWM(data.motor, 0, data.command)
 
 
 
 if __name__ == '__main__':
 
     rospy.init_node('Right_hand_driver', anonymous=True)
-    rospy.Subscriber('servo/Rcmd', servoSet, callback=callback)
+    rospy.Subscriber('servo/Rcmd', servoSet, callback=CALLBACK)
+    rospy.Subscriber('servo/rcmd', servoCmd, callback=callback)
     print 'RIGHT SERVO_DRIVER publishers & subscribers successful Initial'
     rospy.spin()
