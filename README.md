@@ -41,5 +41,20 @@ Installation:
   To launch the robot:
 
       $ roslaunch right_hand servo_driver.launch
-
+   
+  To use remote launch with robot_body you should add source command of your work space in the end of file: /opt/ros/groovy/env.sh
+  it should look like this:
   
+      #!/usr/bin/env sh
+      # generated from catkin/cmake/templates/env.sh.in
+
+      if [ $# -eq 0 ] ; then
+        /bin/echo "Usage: env.sh COMMANDS"
+        /bin/echo "Calling env.sh without arguments is not supported anymore. Instead$
+        exit 1
+      else
+        . "/opt/ros/groovy/setup.sh"
+        . "/home/pi/catkin_ws/devel/setup.sh"
+        exec "$@"
+      fi
+
