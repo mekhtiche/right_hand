@@ -1,4 +1,4 @@
-# robot left hand raspberry pi zero system
+# robot right hand raspberry pi zero system
 install raspbian 
 
 this package need : 
